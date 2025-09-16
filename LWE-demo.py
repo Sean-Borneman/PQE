@@ -284,6 +284,39 @@ def main():
     quantum_result = int(most_frequent, 2)
     print(f"Most frequent result: {quantum_result}")
     print(f"Inner product test {'PASSED' if quantum_result == expected else 'FAILED'}!")
+    
+    # VISUALIZATION OPTIONS
+    print("\n5. Circuit Visualization:")
+    
+    # Option 1: Text-based circuit diagram
+    print("Text representation:")
+    print(qc.draw())
+    
+    # Option 2: Save circuit diagram as image (requires matplotlib)
+
+    from qiskit.visualization import circuit_drawer
+    circuit_img = circuit_drawer(qc, output='mpl', style='iqx')
+    circuit_img.savefig('lwe_quantum_circuit.png', dpi=300, bbox_inches='tight')
+    print("Circuit diagram saved as 'lwe_quantum_circuit.png'")
+
+    # Option 3: Interactive circuit viewer (if in Jupyter)
+    try:
+        from qiskit.visualization import plot_circuit_layout
+        print("For interactive viewing, run in Jupyter notebook:")
+        print("qc.draw('mpl')  # Shows interactive plot")
+    except:
+        pass
+    
+    # Option 4: Circuit statistics
+    print(f"\nCircuit Statistics:")
+    print(f"Total qubits: {qc.num_qubits}")
+    print(f"Circuit depth: {qc.depth()}")
+    print(f"Gate count: {qc.count_ops()}")
+    
+    # Option 5: Show gate decomposition
+    print("\nGate decomposition:")
+    decomposed = qc.decompose()
+    print(f"After decomposition: {decomposed.count_ops()}")
 
 if __name__ == "__main__":
     main()
