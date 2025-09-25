@@ -5,6 +5,9 @@ At the moment I'm mostly workwith LWE related schemes and what you'll see here a
 -I did breifly try using phase arithmatic but it doesnt save qubits essentially by definition and also doesnt really save gates
 - Right now i just have a very basic example running, the only use of quantum phenoena is a phase shift to add error and adjust the rate.scale at which error is added, cool but not really all that useful basicly just bitwise additino/multiplcation on numbers less than 4.
 
+You Cna see a picture of the basic circuit below, basic but it works!
+![cirucit_image](https://github.com/Sean-Borneman/PQE/blob/main/Simple_circuit_viz/WITH-error-circuit.png)
+
 There is a horrible script in here that tries to generalize the process for creating theses circuits but it does too much with hybird computing which im trying to avoid. 
 
 My next steps right now are probably to try to scale this or more likely to try to adapt this to Module LWE which is what the NIST finallists use. 
