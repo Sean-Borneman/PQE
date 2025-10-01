@@ -23,7 +23,7 @@ class QuantumMod4Multiplier:
         b = QuantumRegister(2, 'b')           # Second number (0-3) 
         product = QuantumRegister(2, 'prod')  # Final result (0-3)
         temp1 = QuantumRegister(2, 'temp1')   # For a×b₀
-        temp2 = QuantumRegister(2, 'temp2')   # For a×b₁×2
+        temp2 = QuantumRegister(1, 'temp2')   # For a×b₁×2
         cbits = ClassicalRegister(2, 'result')
         
         circuit = QuantumCircuit(a, b, product, temp1, temp2, cbits)
@@ -72,7 +72,7 @@ class QuantumMod4Multiplier:
         """
         # source×2: bit 0 of source becomes bit 1 of target
         # bit 1 of source wraps to bit 0 of target (since we're mod 4)
-        circuit.ccx(control, source[0], target[1])  # source[0] → target[1]
+        circuit.ccx(control, source[0], target[0])  # source[0] → target[1]
         # circuit.ccx(control, source[1], target[0])  # source[1] → target[0] (wraparound)
     
     def _quantum_add_mod4(self, circuit, a_reg, b_reg, result_reg):
@@ -83,17 +83,8 @@ class QuantumMod4Multiplier:
         # Copy a to result
         circuit.cx(a_reg[0], result_reg[0])
         circuit.cx(a_reg[1], result_reg[1])
-        
-        # Add b to result with carry logic
-        circuit.cx(b_reg[0], result_reg[0])
-        
-        # Carry logic (from our working adder)
-        circuit.x(result_reg[0])
-        circuit.ccx(b_reg[0], result_reg[0], result_reg[1])
-        circuit.x(result_reg[0])
-
     
-        circuit.cx(b_reg[1], result_reg[1])
+        circuit.cx(b_reg[0], result_reg[1])
 
 def run_circuit(circuit, shots=1000):
     """Run a quantum circuit and return results"""
