@@ -289,9 +289,9 @@ if __name__ == "__main__":
     
     # Test values
     a0_val = 2  # First polynomial: 2 + 3x
-    a1_val = 3
-    b0_val = 3  # Second polynomial: 4 + x
-    b1_val = 2
+    a1_val = 3 #a x
+    b0_val = 4  # Second polynomial: 4 + x
+    b1_val = 1 # b
     n_bits = 3
     modulus = 8
     
